@@ -1,6 +1,6 @@
 import { stripHtml } from "string-strip-html";
 
-const propertiesToSanitize = ["email", "password", "name", "type", "value", "description","date"];
+const propertiesToSanitize = ["email", "password", "name", "type", "value", "description", "date"];
 const requestObjectsToSanitize = ["headers", "body"];
 
 function sanitizer(request, response, next) {
@@ -16,7 +16,7 @@ function sanitizer(request, response, next) {
             const propertyName = propertiesToSanitize[i];
             const propertyValue = String(object?.[propertyName]);
 
-            if (!propertyValue) {
+            if (propertyValue === "undefined" || propertyValue === undefined) {
                 continue
             }
 
@@ -24,8 +24,6 @@ function sanitizer(request, response, next) {
             response.locals[objectKey][propertyName] = stripHtml(propertyValue).result;
         }
     }
-
-    console.log(response.locals.body);
     next();
 }
 

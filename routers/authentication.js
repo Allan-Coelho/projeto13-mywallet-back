@@ -5,7 +5,7 @@ import { userValidation } from '../middlewares/userValidation.js'
 
 const router = express.Router();
 
-router.get('/authentication', sanitizer, signin);
+router.post('/authentication', sanitizer, signin);
 router.post('/authentication', sanitizer, userValidation, signup);
 
 export default router;

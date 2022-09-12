@@ -20,7 +20,6 @@ function transactionValidation(request, response, next) {
         return
     };
 
-    console.log(validation.value)
     response.locals.body = validation.value;
     next();
 }

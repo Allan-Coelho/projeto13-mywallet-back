@@ -8,7 +8,10 @@ function userValidation(request, response, next) {
     const isEmailValid = emailSchema.validate(response.locals.body.email);
     const isPasswordValid = passwordSchema.validate(response.locals.body.password);
 
-    if (isEmailValid.error !== undefined && isNameValid.error !== undefined && isPasswordValid.error !== undefined) {
+    if (isEmailValid.error === undefined && isNameValid.error === undefined && isPasswordValid.error === undefined) {
+        response.locals.body.name = isNameValid.value
+        response.locals.body.email = isEmailValid.value
+        response.locals.body.password = isPasswordValid.value
         next();
         return
     }

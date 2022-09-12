@@ -26,7 +26,7 @@ async function signin(request, response) {
                 isDeleted: false
             });
 
-            response.send(token);
+            response.send({ token: token, username: user.name });
             return
         }
 

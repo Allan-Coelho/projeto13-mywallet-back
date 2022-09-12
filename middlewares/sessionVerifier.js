@@ -7,7 +7,7 @@ async function sessionVerifier(request, response, next) {
         const sessions = database.collection("sessions");
         const userSession = await sessions.findOne({ sessionId: token });
 
-        if (!authorization) {
+        if (!authorization || !authorization.includes("Bearer ")) {
             response.status(401).send("Authorization token is missing");
             return
         }
